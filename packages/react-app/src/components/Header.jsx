@@ -6,7 +6,7 @@ import React from "react";
 export default function Header() {
   return (
     <a href="https://github.com/NeoDaoist/guilds" target="_blank" rel="noopener noreferrer">
-      <PageHeader title="🧪🎻 Tne Guilds of Sibiu" subTitle="⚒️🎼 Smart Score example" style={{ cursor: "pointer" }} />
+      <PageHeader title="🧪🎻 Tne Guilds of Sibiu" subTitle="⚒️🎼 Smart Score Demo" style={{ cursor: "pointer" }} />
     </a>
   );
 }
