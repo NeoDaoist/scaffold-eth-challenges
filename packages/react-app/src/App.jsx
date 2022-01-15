@@ -65,8 +65,8 @@ const NETWORKCHECK = true;
 const STARTING_JSON = {
   description: "It's actually a bison?",
   external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-  image: "https://austingriffith.com/images/paintings/buffalo.jpg",
-  name: "Buffalo",
+  image: "https://austingriffith.com/images/paintings/Blacksmiths.jpg",
+  name: "Blacksmiths",
   attributes: [
     {
       trait_type: "BackgroundColor",
@@ -271,28 +271,28 @@ function App(props) {
   ]);
 
   // keep track of a variable from the contract in the local React state:
-  const balance = useContractReader(readContracts, "YourCollectible", "balanceOf", [address]);
+  const balance = useContractReader(readContracts, "TheGuildsOfSibiu", "balanceOf", [address]);
   console.log("🤗 balance:", balance);
 
   // 📟 Listen for broadcast events
-  const transferEvents = useEventListener(readContracts, "YourCollectible", "Transfer", localProvider, 1);
+  const transferEvents = useEventListener(readContracts, "TheGuildsOfSibiu", "Transfer", localProvider, 1);
   console.log("📟 Transfer events:", transferEvents);
 
   //
-  // 🧠 This effect will update yourCollectibles by polling when your balance changes
+  // 🧠 This effect will update TheGuildsOfSibius by polling when your balance changes
   //
   const yourBalance = balance && balance.toNumber && balance.toNumber();
-  const [yourCollectibles, setYourCollectibles] = useState();
+  const [TheGuildsOfSibius, setTheGuildsOfSibius] = useState();
 
   useEffect(() => {
-    const updateYourCollectibles = async () => {
+    const updateTheGuildsOfSibius = async () => {
       const collectibleUpdate = [];
       for (let tokenIndex = 0; tokenIndex < balance; tokenIndex++) {
         try {
-          console.log("GEtting token index", tokenIndex);
-          const tokenId = await readContracts.YourCollectible.tokenOfOwnerByIndex(address, tokenIndex);
+          console.log("Getting token index", tokenIndex);
+          const tokenId = await readContracts.TheGuildsOfSibiu.tokenOfOwnerByIndex(address, tokenIndex);
           console.log("tokenId", tokenId);
-          const tokenURI = await readContracts.YourCollectible.tokenURI(tokenId);
+          const tokenURI = await readContracts.TheGuildsOfSibiu.tokenURI(tokenId);
           console.log("tokenURI", tokenURI);
 
           const ipfsHash = tokenURI.replace("https://ipfs.io/ipfs/", "");
@@ -311,9 +311,9 @@ function App(props) {
           console.log(e);
         }
       }
-      setYourCollectibles(collectibleUpdate);
+      setTheGuildsOfSibius(collectibleUpdate);
     };
-    updateYourCollectibles();
+    updateTheGuildsOfSibius();
   }, [address, yourBalance]);
 
   /*
@@ -519,122 +519,178 @@ function App(props) {
   // the json for the nfts
   const json = {
     1: {
-      description: "It's actually a bison?",
-      external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-      image: "https://austingriffith.com/images/paintings/buffalo.jpg",
-      name: "Buffalo",
+      description:
+        "A blacksmith is a metalsmith who creates objects primarily from wrought iron or steel, but sometimes from other metals, by forging the metal, using tools to hammer, bend, and cut. Blacksmiths produce objects such as gates, grilles, railings, light fixtures, furniture, sculpture, tools, agricultural implements, decorative and religious items, cooking utensils, and weapons.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreihs5mtuztqlhiewpuxwlrzuxf3xtqdi5i7s4b5tlnbrcxkz5gnkau.ipfs.dweb.link/",
+      audio: "https://bafybeidgorr7jwq4ogls3dbrwmvc4ly6ydhiiotbureo4e3any2322tjla.ipfs.dweb.link/",
+      name: "Blacksmiths",
       attributes: [
         {
-          trait_type: "BackgroundColor",
-          value: "green",
+          trait_type: "Collection",
+          value: "GUILDS001",
         },
         {
-          trait_type: "Eyes",
-          value: "googly",
+          trait_type: "Guild",
+          value: "Blacksmiths",
         },
         {
-          trait_type: "Stamina",
-          value: 42,
+          trait_type: "Aggression",
+          value: 90,
         },
       ],
     },
     2: {
-      description: "What is it so worried about?",
-      external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-      image: "https://austingriffith.com/images/paintings/zebra.jpg",
-      name: "Zebra",
+      description:
+        "A goldsmith is a metalworker who specializes in working with gold and other precious metals. Nowadays they mainly specialize in jewelry-making but historically, goldsmiths have also made silverware, platters, goblets, decorative and serviceable utensils, and ceremonial or religious items.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreienn6mzlwjifbrkt2usb5g6zcp6dyauxq3jepnagt7dpvuj24xspa.ipfs.dweb.link/",
+      audio: "https://bafybeifb63go2wnx2uweob5ct3ighy6ahhgyvt3nn73c5tqnor4her5y2e.ipfs.dweb.link/",
+      name: "Goldsmiths",
       attributes: [
         {
-          trait_type: "BackgroundColor",
-          value: "blue",
+          trait_type: "Collection",
+          value: "GUILDS001",
         },
         {
-          trait_type: "Eyes",
-          value: "googly",
+          trait_type: "Guild",
+          value: "Goldsmiths",
         },
         {
-          trait_type: "Stamina",
-          value: 38,
+          trait_type: "Aggression",
+          value: 20,
         },
       ],
     },
     3: {
-      description: "What a horn!",
-      external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-      image: "https://austingriffith.com/images/paintings/rhino.jpg",
-      name: "Rhino",
+      description:
+        "Originally, shoes were made one at a time by hand, often by groups of cobblers (also known as cordwainers). In the 18th century, dozens or even hundreds of masters, journeymen and apprentices (both men and women) would work together in a shop, dividing up the work into individual tasks.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreidc36ih4latob5xkiwyyp252q2bjwhbd6hssbepbotgoo6iwdd5qq.ipfs.dweb.link/",
+      audio: "https://bafybeidwisgrranqlocui354yr3ac2rmm6afebzjdblatwgytkbtlote6m.ipfs.dweb.link/",
+      name: "Cobblers",
       attributes: [
         {
-          trait_type: "BackgroundColor",
-          value: "pink",
+          trait_type: "Collection",
+          value: "GUILDS001",
         },
         {
-          trait_type: "Eyes",
-          value: "googly",
+          trait_type: "Guild",
+          value: "Cobblers",
         },
         {
-          trait_type: "Stamina",
-          value: 22,
+          trait_type: "Aggression",
+          value: 70,
         },
       ],
     },
     4: {
-      description: "Is that an underbyte?",
-      external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-      image: "https://austingriffith.com/images/paintings/fish.jpg",
-      name: "Fish",
+      description:
+        "Embroidery is the craft of decorating fabric or other materials using a needle to apply thread or yarn. Embroidery may also incorporate other materials such as pearls, beads, quills, and sequins. In modern days, embroidery is usually seen on caps, hats, coats, overlays, blankets, dress shirts, denim, dresses, stockings, and golf shirts.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreidnz5gk3ljny7objwgkz5rfo54fjvpt4wmjv3l4nrtzyv4kryisii.ipfs.dweb.link/",
+      audio: "https://bafybeif547b6ug7whg6k5kytcevzlmvdrofgxqp52znfgxqezbfk6zwe6m.ipfs.dweb.link/",
+      name: "Embroiderers",
       attributes: [
         {
-          trait_type: "BackgroundColor",
-          value: "blue",
+          trait_type: "Collection",
+          value: "GUILDS001",
         },
         {
-          trait_type: "Eyes",
-          value: "googly",
+          trait_type: "Guild",
+          value: "Embroiderers",
         },
         {
-          trait_type: "Stamina",
-          value: 15,
+          trait_type: "Aggression",
+          value: 30,
         },
       ],
     },
     5: {
-      description: "So delicate.",
-      external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-      image: "https://austingriffith.com/images/paintings/flamingo.jpg",
-      name: "Flamingo",
+      description:
+        "Stonemasonry is the creation of buildings, structures, and sculpture using stone as the primary material. It is one of the oldest activities and professions in human history. Many of the long-lasting, ancient shelters, temples, monuments, artifacts, fortifications, roads, bridges, and entire cities were built of stone.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreigjijnelhsxafqvdjy6cwom4khi6ag5pq5y4etxtcol7binxaejau.ipfs.dweb.link/",
+      audio: "https://bafybeicmlmvbpl2pdxc3c6u5fxo36tzth37j7o2rjw633bmfynmcuius6y.ipfs.dweb.link/",
+      name: "Stonemasons",
       attributes: [
         {
-          trait_type: "BackgroundColor",
-          value: "black",
+          trait_type: "Collection",
+          value: "GUILDS001",
         },
         {
-          trait_type: "Eyes",
-          value: "googly",
+          trait_type: "Guild",
+          value: "Stonemasons",
         },
         {
-          trait_type: "Stamina",
-          value: 6,
+          trait_type: "Aggression",
+          value: 60,
         },
       ],
     },
     6: {
-      description: "Raaaar!",
-      external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-      image: "https://austingriffith.com/images/paintings/godzilla.jpg",
-      name: "Godzilla",
+      description:
+        "Glassblowing is a glassforming technique that involves inflating molten glass into a bubble (or parison) with the aid of a blowpipe (or blow tube). A person who blows glass is called a glassblower, glassmith, or gaffer.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreid2veahzmlrga2wiyzbgexog7fc66oa5awwih7ajki5uiowpovfxm.ipfs.dweb.link/",
+      audio: "https://bafybeifepgi3gsgmaoru5roydwi5gtgoy24lzf4qy3pydriwt7qa2zo76i.ipfs.dweb.link/",
+      name: "Glassblowers",
       attributes: [
         {
-          trait_type: "BackgroundColor",
-          value: "orange",
+          trait_type: "Collection",
+          value: "GUILDS001",
         },
         {
-          trait_type: "Eyes",
-          value: "googly",
+          trait_type: "Guild",
+          value: "Glassblowers",
         },
         {
-          trait_type: "Stamina",
-          value: 99,
+          trait_type: "Aggression",
+          value: 50,
+        },
+      ],
+    },
+    7: {
+      description:
+        "A chandlery was originally the office in a wealthy medieval household responsible for wax and candles, as well as the room in which the candles were kept. It could be headed by a candlemaker. The office was subordinated to the kitchen, and only existed as a separate office in larger households.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreid6azxlub6o4j46f2z6rzj3sv5hxvs3ehxsx5l7frhtrtp7cpghne.ipfs.dweb.link/",
+      audio: "https://bafybeicck7rhsopniillzcfmsf7ceqt5364wkhpb37lldizpro3ud2o2hy.ipfs.dweb.link/",
+      name: "Candlemakers",
+      attributes: [
+        {
+          trait_type: "Collection",
+          value: "GUILDS001",
+        },
+        {
+          trait_type: "Guild",
+          value: "Candlemakers",
+        },
+        {
+          trait_type: "Aggression",
+          value: 10,
+        },
+      ],
+    },
+    8: {
+      description:
+        "Fletching is the fin-shaped aerodynamic stabilization device attached on arrows, bolts, darts, or javelins, and are typically made from light semi-flexible materials such as feathers or bark. Each piece of such fin is a fletch, also known as a flight or feather. A fletcher is a person who attaches fletchings to the shaft of arrows.",
+      external_url: "https://thomasvieiracomposer.com/the-guilds-of-sibiu-for-chamber-quintet/",
+      image: "https://bafkreih2ot6ogzl3wbltlh32duaspoia5c6tdoh66pvpivk557bujewjuu.ipfs.dweb.link/",
+      audio: "https://bafybeihjo7s6qoyocwjhss2ohi56q2omkti6rj2thafzvl7hdp2uq4l3zm.ipfs.dweb.link/",
+      name: "Arrowfletchers",
+      attributes: [
+        {
+          trait_type: "Collection",
+          value: "GUILDS001",
+        },
+        {
+          trait_type: "Guild",
+          value: "Arrowfletchers",
+        },
+        {
+          trait_type: "Aggression",
+          value: 80,
         },
       ],
     },
@@ -647,8 +703,8 @@ function App(props) {
     console.log("Uploaded Hash: ", uploaded);
     const result = tx(
       writeContracts &&
-        writeContracts.YourCollectible &&
-        writeContracts.YourCollectible.mintItem(address, uploaded.path),
+        writeContracts.TheGuildsOfSibiu &&
+        writeContracts.TheGuildsOfSibiu.mintItem(address, uploaded.path),
       update => {
         console.log("📡 Transaction Update:", update);
         if (update && (update.status === "confirmed" || update.status === 1)) {
@@ -681,47 +737,7 @@ function App(props) {
               }}
               to="/"
             >
-              YourCollectibles
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/transfers">
-            <Link
-              onClick={() => {
-                setRoute("/transfers");
-              }}
-              to="/transfers"
-            >
-              Transfers
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/ipfsup">
-            <Link
-              onClick={() => {
-                setRoute("/ipfsup");
-              }}
-              to="/ipfsup"
-            >
-              IPFS Upload
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/ipfsdown">
-            <Link
-              onClick={() => {
-                setRoute("/ipfsdown");
-              }}
-              to="/ipfsdown"
-            >
-              IPFS Download
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/debugcontracts">
-            <Link
-              onClick={() => {
-                setRoute("/debugcontracts");
-              }}
-              to="/debugcontracts"
-            >
-              Debug Contracts
+              The Guilds of Sibiu
             </Link>
           </Menu.Item>
         </Menu>
@@ -742,7 +758,7 @@ function App(props) {
             <div style={{ width: 640, margin: "auto", marginTop: 32, paddingBottom: 32 }}>
               <List
                 bordered
-                dataSource={yourCollectibles}
+                dataSource={TheGuildsOfSibius}
                 renderItem={item => {
                   const id = item.id.toNumber();
                   return (
@@ -756,6 +772,12 @@ function App(props) {
                       >
                         <div>
                           <img src={item.image} style={{ maxWidth: 150 }} />
+                        </div>
+                        <div>
+                          <audio controls>
+                            <source src={item.audio} type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                          </audio>
                         </div>
                         <div>{item.description}</div>
                       </Card>
@@ -781,7 +803,7 @@ function App(props) {
                         <Button
                           onClick={() => {
                             console.log("writeContracts", writeContracts);
-                            tx(writeContracts.YourCollectible.transferFrom(address, transferToAddresses[id], id));
+                            tx(writeContracts.TheGuildsOfSibiu.transferFrom(address, transferToAddresses[id], id));
                           }}
                         >
                           Transfer
@@ -792,109 +814,6 @@ function App(props) {
                 }}
               />
             </div>
-          </Route>
-
-          <Route path="/transfers">
-            <div style={{ width: 600, margin: "auto", marginTop: 32, paddingBottom: 32 }}>
-              <List
-                bordered
-                dataSource={transferEvents}
-                renderItem={item => {
-                  return (
-                    <List.Item key={item[0] + "_" + item[1] + "_" + item.blockNumber + "_" + item.args[2].toNumber()}>
-                      <span style={{ fontSize: 16, marginRight: 8 }}>#{item.args[2].toNumber()}</span>
-                      <Address address={item.args[0]} ensProvider={mainnetProvider} fontSize={16} /> =&gt;
-                      <Address address={item.args[1]} ensProvider={mainnetProvider} fontSize={16} />
-                    </List.Item>
-                  );
-                }}
-              />
-            </div>
-          </Route>
-
-          <Route path="/ipfsup">
-            <div style={{ paddingTop: 32, width: 740, margin: "auto", textAlign: "left" }}>
-              <ReactJson
-                style={{ padding: 8 }}
-                src={yourJSON}
-                theme="pop"
-                enableClipboard={false}
-                onEdit={(edit, a) => {
-                  setYourJSON(edit.updated_src);
-                }}
-                onAdd={(add, a) => {
-                  setYourJSON(add.updated_src);
-                }}
-                onDelete={(del, a) => {
-                  setYourJSON(del.updated_src);
-                }}
-              />
-            </div>
-
-            <Button
-              style={{ margin: 8 }}
-              loading={sending}
-              size="large"
-              shape="round"
-              type="primary"
-              onClick={async () => {
-                console.log("UPLOADING...", yourJSON);
-                setSending(true);
-                setIpfsHash();
-                const result = await ipfs.add(JSON.stringify(yourJSON)); // addToIPFS(JSON.stringify(yourJSON))
-                if (result && result.path) {
-                  setIpfsHash(result.path);
-                }
-                setSending(false);
-                console.log("RESULT:", result);
-              }}
-            >
-              Upload to IPFS
-            </Button>
-
-            <div style={{ padding: 16, paddingBottom: 150 }}>{ipfsHash}</div>
-          </Route>
-          <Route path="/ipfsdown">
-            <div style={{ paddingTop: 32, width: 740, margin: "auto" }}>
-              <Input
-                value={ipfsDownHash}
-                placeHolder="IPFS hash (like QmadqNw8zkdrrwdtPFK1pLi8PPxmkQ4pDJXY8ozHtz6tZq)"
-                onChange={e => {
-                  setIpfsDownHash(e.target.value);
-                }}
-              />
-            </div>
-            <Button
-              style={{ margin: 8 }}
-              loading={sending}
-              size="large"
-              shape="round"
-              type="primary"
-              onClick={async () => {
-                console.log("DOWNLOADING...", ipfsDownHash);
-                setDownloading(true);
-                setIpfsContent();
-                const result = await getFromIPFS(ipfsDownHash); // addToIPFS(JSON.stringify(yourJSON))
-                if (result && result.toString) {
-                  setIpfsContent(result.toString());
-                }
-                setDownloading(false);
-              }}
-            >
-              Download from IPFS
-            </Button>
-
-            <pre style={{ padding: 16, width: 500, margin: "auto", paddingBottom: 150 }}>{ipfsContent}</pre>
-          </Route>
-          <Route path="/debugcontracts">
-            <Contract
-              name="YourCollectible"
-              signer={userSigner}
-              provider={localProvider}
-              address={address}
-              blockExplorer={blockExplorer}
-              contractConfig={contractConfig}
-            />
           </Route>
         </Switch>
       </BrowserRouter>

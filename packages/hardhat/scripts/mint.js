@@ -21,13 +21,16 @@ const main = async () => {
   console.log("\n\n 🎫 Minting to " + toAddress + "...\n");
 
   const { deployer } = await getNamedAccounts();
-  const yourCollectible = await ethers.getContract("YourCollectible", deployer);
+  const TheGuildsOfSibiu = await ethers.getContract(
+    "TheGuildsOfSibiu",
+    deployer
+  );
 
-  const buffalo = {
+  const Blacksmiths = {
     description: "It's actually a bison?",
     external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-    image: "https://austingriffith.com/images/paintings/buffalo.jpg",
-    name: "Buffalo",
+    image: "https://austingriffith.com/images/paintings/Blacksmiths.jpg",
+    name: "Blacksmiths",
     attributes: [
       {
         trait_type: "BackgroundColor",
@@ -43,21 +46,21 @@ const main = async () => {
       },
     ],
   };
-  console.log("Uploading buffalo...");
-  const uploaded = await ipfs.add(JSON.stringify(buffalo));
+  console.log("Uploading Blacksmiths...");
+  const uploaded = await ipfs.add(JSON.stringify(Blacksmiths));
 
-  console.log("Minting buffalo with IPFS hash (" + uploaded.path + ")");
-  await yourCollectible.mintItem(toAddress, uploaded.path, {
+  console.log("Minting Blacksmiths with IPFS hash (" + uploaded.path + ")");
+  await TheGuildsOfSibiu.mintItem(toAddress, uploaded.path, {
     gasLimit: 400000,
   });
 
   await sleep(delayMS);
 
-  const zebra = {
+  const Goldsmiths = {
     description: "What is it so worried about?",
     external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-    image: "https://austingriffith.com/images/paintings/zebra.jpg",
-    name: "Zebra",
+    image: "https://austingriffith.com/images/paintings/Goldsmiths.jpg",
+    name: "Goldsmiths",
     attributes: [
       {
         trait_type: "BackgroundColor",
@@ -73,21 +76,23 @@ const main = async () => {
       },
     ],
   };
-  console.log("Uploading zebra...");
-  const uploadedzebra = await ipfs.add(JSON.stringify(zebra));
+  console.log("Uploading Goldsmiths...");
+  const uploadedGoldsmiths = await ipfs.add(JSON.stringify(Goldsmiths));
 
-  console.log("Minting zebra with IPFS hash (" + uploadedzebra.path + ")");
-  await yourCollectible.mintItem(toAddress, uploadedzebra.path, {
+  console.log(
+    "Minting Goldsmiths with IPFS hash (" + uploadedGoldsmiths.path + ")"
+  );
+  await TheGuildsOfSibiu.mintItem(toAddress, uploadedGoldsmiths.path, {
     gasLimit: 400000,
   });
 
   await sleep(delayMS);
 
-  const rhino = {
+  const Cobblers = {
     description: "What a horn!",
     external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-    image: "https://austingriffith.com/images/paintings/rhino.jpg",
-    name: "Rhino",
+    image: "https://austingriffith.com/images/paintings/Cobblers.jpg",
+    name: "Cobblers",
     attributes: [
       {
         trait_type: "BackgroundColor",
@@ -103,21 +108,23 @@ const main = async () => {
       },
     ],
   };
-  console.log("Uploading rhino...");
-  const uploadedrhino = await ipfs.add(JSON.stringify(rhino));
+  console.log("Uploading Cobblers...");
+  const uploadedCobblers = await ipfs.add(JSON.stringify(Cobblers));
 
-  console.log("Minting rhino with IPFS hash (" + uploadedrhino.path + ")");
-  await yourCollectible.mintItem(toAddress, uploadedrhino.path, {
+  console.log(
+    "Minting Cobblers with IPFS hash (" + uploadedCobblers.path + ")"
+  );
+  await TheGuildsOfSibiu.mintItem(toAddress, uploadedCobblers.path, {
     gasLimit: 400000,
   });
 
   await sleep(delayMS);
 
-  const fish = {
+  const Embroiderers = {
     description: "Is that an underbyte?",
     external_url: "https://austingriffith.com/portfolio/paintings/", // <-- this can link to a page for the specific file too
-    image: "https://austingriffith.com/images/paintings/fish.jpg",
-    name: "Fish",
+    image: "https://austingriffith.com/images/paintings/Embroiderers.jpg",
+    name: "Embroiderers",
     attributes: [
       {
         trait_type: "BackgroundColor",
@@ -133,29 +140,31 @@ const main = async () => {
       },
     ],
   };
-  console.log("Uploading fish...");
-  const uploadedfish = await ipfs.add(JSON.stringify(fish));
+  console.log("Uploading Embroiderers...");
+  const uploadedEmbroiderers = await ipfs.add(JSON.stringify(Embroiderers));
 
-  console.log("Minting fish with IPFS hash (" + uploadedfish.path + ")");
-  await yourCollectible.mintItem(toAddress, uploadedfish.path, {
+  console.log(
+    "Minting Embroiderers with IPFS hash (" + uploadedEmbroiderers.path + ")"
+  );
+  await TheGuildsOfSibiu.mintItem(toAddress, uploadedEmbroiderers.path, {
     gasLimit: 400000,
   });
 
   await sleep(delayMS);
 
   console.log(
-    "Transferring Ownership of YourCollectible to " + toAddress + "..."
+    "Transferring Ownership of TheGuildsOfSibiu to " + toAddress + "..."
   );
 
-  await yourCollectible.transferOwnership(toAddress, { gasLimit: 400000 });
+  await TheGuildsOfSibiu.transferOwnership(toAddress, { gasLimit: 400000 });
 
   await sleep(delayMS);
 
   /*
 
 
-  console.log("Minting zebra...")
-  await yourCollectible.mintItem("0xD75b0609ed51307E13bae0F9394b5f63A7f8b6A1","zebra.jpg")
+  console.log("Minting Goldsmiths...")
+  await TheGuildsOfSibiu.mintItem("0xD75b0609ed51307E13bae0F9394b5f63A7f8b6A1","Goldsmiths.jpg")
 
   */
 
